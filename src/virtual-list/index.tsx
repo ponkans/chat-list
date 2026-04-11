@@ -23,7 +23,7 @@ const VirtualList = (props: VirtualListProps) => {
         if (activeIndexs.includes(index)) {
           return (
             <div
-              data-virtual-key={item.key}
+              data-virtual-index={index}
               ref={(node) => setItemRef(node, item.key)}
               key={item.key}
             >
@@ -33,7 +33,7 @@ const VirtualList = (props: VirtualListProps) => {
         }
         return (
           <div
-            data-virtual-key={item.key}
+            data-virtual-index={index}
             ref={(node) => setItemRef(node, item.key)}
             key={item.key}
             style={{ height: defaultItemHeight }}

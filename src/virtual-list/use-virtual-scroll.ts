@@ -70,15 +70,15 @@ export function useVirtualScroll({ itemCount = 5, overscan = 5 }) {
     const observer = new IntersectionObserver((entries) => {
       let changed = false;
       entries.forEach((entry) => {
-        const itemKey = Number(entry.target.dataset.virtualKey);
+        const itemIndex = Number(entry.target.dataset.virtualIndex);
         if (entry.isIntersecting) {
-          if (!visiableIndexsSet.current.has(itemKey)) {
-            visiableIndexsSet.current.add(itemKey);
+          if (!visiableIndexsSet.current.has(itemIndex)) {
+            visiableIndexsSet.current.add(itemIndex);
             changed = true;
           }
           return;
         }
-        visiableIndexsSet.current.delete(itemKey);
+        visiableIndexsSet.current.delete(itemIndex);
       });
       if (changed) {
         recomputeRanges();
