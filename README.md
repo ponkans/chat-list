@@ -1,5 +1,5 @@
 # chatList
-[notin link](https://zongwei.notion.site/ChatList-33afc0ce7f508047a76ff834fe7736a2?source=copy_link)
+[语雀文档](https://www.yuque.com/jieshuiguai/zzdrgk/dx6wodbdvob7x6fe?singleDoc#%20%E3%80%8AChatList%E3%80%8B)
 
 ### 已完成
 
