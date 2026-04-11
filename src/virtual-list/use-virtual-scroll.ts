@@ -9,8 +9,8 @@ function areNumberListEqual(a, b) {
 }
 
 // [8, 9, 10] -> [6, 7, 8, 9, 10, 11, 12]
-function buildActiveIndexs(visiableIndexs, itemCount, overscan) {
-  const activeIndexs = [...visiableIndexs];
+function buildActiveIndexs(visibleIndexs, itemCount, overscan) {
+  const activeIndexs = [...visibleIndexs];
 
   let i = overscan;
   while (i > 0) {
@@ -35,20 +35,20 @@ export function useVirtualScroll({ itemCount = 5, overscan = 5 }) {
   const targetItemMap = React.useRef({});
 
   const [activeIndexs, setActiveIndexs] = React.useState([]);
-  const visiableIndexsSet = React.useRef(new Set());
-  const [visiableIndexs, setVisiableIndexs] = React.useState([]);
+  const visibleIndexsSet = React.useRef(new Set());
+  const [visibleIndexs, setVisibleIndexs] = React.useState([]);
 
   const recomputeRanges = () => {
-    const nextVisiableList = Array.from(visiableIndexsSet.current).sort(
+    const nextVisibleList = Array.from(visibleIndexsSet.current).sort(
       (a, b) => a - b,
     );
-    setVisiableIndexs((current) =>
-      areNumberListEqual(current, nextVisiableList)
+    setVisibleIndexs((current) =>
+      areNumberListEqual(current, nextVisibleList)
         ? current
-        : nextVisiableList,
+        : nextVisibleList,
     );
     const nextActiveIndexs = buildActiveIndexs(
-      nextVisiableList,
+      nextVisibleList,
       itemCount,
       overscan,
     );
@@ -72,13 +72,13 @@ export function useVirtualScroll({ itemCount = 5, overscan = 5 }) {
       entries.forEach((entry) => {
         const itemIndex = Number(entry.target.dataset.virtualIndex);
         if (entry.isIntersecting) {
-          if (!visiableIndexsSet.current.has(itemIndex)) {
-            visiableIndexsSet.current.add(itemIndex);
+          if (!visibleIndexsSet.current.has(itemIndex)) {
+            visibleIndexsSet.current.add(itemIndex);
             changed = true;
           }
           return;
         }
-        visiableIndexsSet.current.delete(itemIndex);
+        visibleIndexsSet.current.delete(itemIndex);
       });
       if (changed) {
         recomputeRanges();
@@ -104,6 +104,6 @@ export function useVirtualScroll({ itemCount = 5, overscan = 5 }) {
     rootRef,
     setItemRef,
     activeIndexs,
-    visiableIndexs,
+    visibleIndexs,
   };
 }
